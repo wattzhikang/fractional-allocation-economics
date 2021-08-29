@@ -39,12 +39,15 @@ def getExponential(a, b, c, d):
   return exponential
 
 class Use:
-  def __init__(self, name, h, m, b) -> None:
+  def __init__(self, name, multiplier, linearSlope=None, offset=None, expCoefficient=None, horizontalShift=None, exponent=None) -> None:
     self.name = name
-    self.h = h
-    self.price = getLinear(m, b)
+    self.multiplier = multiplier
+    if linearSlope is not None:
+      self.price = getLinear(linearSlope, offset)
+    else:
+      self.price = getExponential(expCoefficient, horizontalShift, exponent, offset)
   def getRevenue(self, quantity) -> float:
-    return self.h * quantity * self.price(quantity * self.h)
+    return self.multiplier * quantity * self.price(quantity * self.multiplier)
 
 with open('sample-data') as f:
   # Read the file and parse as JSON object
@@ -63,9 +66,26 @@ with open('sample-data') as f:
 
   uses = [ ]
   for use in usesData:
-    uses.append(
-      Use(use['name'],use['h'],use['m'],use['b'])
-    )
+    if use['type'] == 'linear':
+      uses.append(
+        Use(
+          use['name'],
+          multiplier=use['multiplier'],
+          linearSlope=use['linearSlope'],
+          offset=use['offset']
+        )
+      )
+    else:
+      uses.append(
+        Use(
+          use['name'],
+          multiplier=use['multiplier'],
+          expCoefficient=use['coefficient'],
+          horizontalShift=use['horizontalShift'],
+          exponent=use['exponent'],
+          offset=use['offset']
+        )
+      )
 
   if len(uses) < 3:
     print('This program does not currently support the allocation of fewer than 3 resources')

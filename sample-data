@@ -5,21 +5,33 @@
     "uses":[
         {
             "name":"A",
-            "h":1.0,
-            "m":-0.1,
-            "b":1.3
+            "multiplier":1.0,
+            "type":"linear",
+            "linearSlope":-0.1,
+            "offset":2.3
         },
         {
             "name":"B",
-            "h":1.0,
-            "m":-0.6,
-            "b":7.0
+            "multiplier":1.0,
+            "type":"linear",
+            "linearSlope":-0.6,
+            "offset":7.0
         },
         {
             "name":"C",
-            "h":1.0,
-            "m":-0.45,
-            "b":5.0
+            "multiplier":1.0,
+            "type":"linear",
+            "linearSlope":-0.45,
+            "offset":5.0
+        },
+        {
+            "name":"D",
+            "multiplier":1.0,
+            "type":"inverse",
+            "coefficient":0.27,
+            "horizontalShift":-0.36,
+            "exponent":0.85,
+            "offset":1.1
         }
     ]
 }
