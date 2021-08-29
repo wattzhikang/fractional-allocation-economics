@@ -109,5 +109,5 @@ with open('sample-data') as f:
   # Output the final configuration
 
   for useIdx in range(len(uses)):
-    print(f'Quantity for {uses[useIdx].name}:\t{maxConfig[useIdx]:.2f}')
-  print(f'Total Revenue: {maxRevenue:.2f}')
+    print(f'Quantity for {uses[useIdx].name}:\t{maxConfig[useIdx]:.2f} {quantityUnit}')
+  print(f'Total Revenue: {priceUnit}{maxRevenue:.2f}')
